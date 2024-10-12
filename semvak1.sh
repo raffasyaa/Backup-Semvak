@@ -12,13 +12,13 @@ export NC='\033[0m';
 
     echo -e ""
     echo -e "${YELLOW}############################################\033[0m${NC}"
-    echo -e "${YELLOW}#######${NC}${CYAN}  BOT Backuper For Marzban ${NC}${YELLOW}#######\033[0m${NC}"
+    echo -e "${YELLOW}#######${NC}${CYAN}  BOT Backuper For Marzban  ${NC}${YELLOW}#########\033[0m${NC}"
     echo -e "${YELLOW}#######${NC}${CYAN} Modder SaputraTech CrazyPler ${NC}${YELLOW}#######\033[0m${NC}"
     echo -e "${YELLOW}############################################\033[0m${NC}"
     echo -e ""
-    echo -e "✩ Untuk mengaktifkan BOT, pertama buat bot dulu di @BotFather."
-    echo -e "✩ Selanjutnya yang dibutuhkan Token dan Chat ID Telegram. "
-    echo -e "✩ BOT auto running setelah input data Token dan Chat ID."
+   echo -e "✩ Untuk mengaktifkan BOT, buat bot dulu di @BotFather."
+    echo -e "✩ Lalu yang dibutuhkan Token dan Chat ID Telegram. "
+    echo -e "✩ Auto running setelah input data Selesai."
     echo -e ""
 
 # Bot token Telegram
@@ -53,7 +53,7 @@ read caption
 
 # Setup Cronjob
 while true; do
-    echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     echo "➽ Setup Cronjob (minutes spasi hours) (e.g : 30 1) : "
     read minute hour
     if [[ $minute == 0 ]] && [[ $hour == 0 ]]; then
@@ -76,7 +76,7 @@ done
 
 # x-ui or marzban or hiddify
 while [[ -z "$xmh" ]]; do
-    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     echo "➽ Untuk melanjutkan instalasi kettik (m) : "
     read xmh
     if [[ $xmh == $'\0' ]]; then
@@ -89,9 +89,10 @@ while [[ -z "$xmh" ]]; do
 done
 
 while [[ -z "$crontabs" ]]; do
-    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     echo "➽ Apakah Anda ingin menghapus setup Crontabs Sebelumnya? [y/n] : "
     read crontabs
+    echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     if [[ $crontabs == $'\0' ]]; then
         echo "⛔ Invalid input. Please choose y or n."
         unset crontabs
@@ -146,14 +147,14 @@ chmod +x /var/lib/marzban/mysql/ac-backup.sh
 
 ZIP=$(cat <<EOF
 docker exec marzban-mysql-1 bash -c "/var/lib/mysql/ac-backup.sh"
-zip -r /root/ac-backup-m.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
-zip -r /root/ac-backup-m.zip /var/lib/marzban/mysql/db-backup/*
+zip -r /root/backup-succeed.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
+zip -r /root/backup-succeed.zip /var/lib/marzban/mysql/db-backup/*
 rm -rf /var/lib/marzban/mysql/db-backup/*
 EOF
 )
 
     else
-      ZIP="zip -r /root/ac-backup-m.zip ${dir}/* /var/lib/marzban/* /opt/marzban/.env"
+      ZIP="zip -r /root/backup-succeed.zip ${dir}/* /var/lib/marzban/* /opt/marzban/.env"
 fi
 
 Tobrut="1.1 Beta"
