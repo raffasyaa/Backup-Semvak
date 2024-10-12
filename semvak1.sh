@@ -2,7 +2,8 @@
 
 # Bot token Telegram
 while [[ -z "$tk" ]]; do
-    echo "➽ Masukan Api Key bot : " read -r tk
+    echo "➽ Masukan Api Key bot : "
+    read tk
     if [[ $tk == $'\0' ]]; then
         echo "Invalid input. Token cannot be empty."
         unset tk
@@ -11,7 +12,8 @@ done
 
 # Chat ID Telegram
 while [[ -z "$chatid" ]]; do
-    echo "➽ Masukan Chat ID : " read -r chatid
+    echo "➽ Masukan Chat ID : "
+    read chatid
     if [[ $chatid == $'\0' ]]; then
         echo "Invalid input. Chat id cannot be empty."
         unset chatid
@@ -22,8 +24,8 @@ while [[ -z "$chatid" ]]; do
 done
 
 # Caption
-echo "➽ Name Client : " read -r caption
-
+echo "➽ Name Client : "
+read caption
 # Setup Cronjob
 while true; do
     echo "Setup Cronjob (minutes spasi hours) (e.g : 30 1) : " read -r minute hour
@@ -59,7 +61,7 @@ while [[ -z "$xmh" ]]; do
 done
 
 while [[ -z "$crontabs" ]]; do
-    echo "Would you like the previous crontabs to be cleared? [y/n] : "
+    echo "Apakah Anda ingin Setup crontab sebelumnya dihapus? [y/n] : "
     read -r crontabs
     if [[ $crontabs == $'\0' ]]; then
         echo "Invalid input. Please choose y or n."
