@@ -104,7 +104,7 @@ done
 
 if [[ "$crontabs" == "y" ]]; then
 # remove cronjobs
-sudo crontab -l | grep -vE '/root/ac-backup.+\.sh' | crontab -
+sudo crontab -l | grep -vE '/root/backup-succeed.+\.sh' | crontab -
 fi
 
 
@@ -125,7 +125,7 @@ if [ -d "/var/lib/marzban/mysql" ]; then
   docker exec marzban-mysql-1 bash -c "mkdir -p /var/lib/mysql/db-backup"
   source /opt/marzban/.env
 
-    cat > "/var/lib/marzban/mysql/ac-backup.sh" <<EOL
+    cat > "/var/lib/marzban/mysql/backup-succeed.sh" <<EOL
 #!/bin/bash
 
 USER="root"
@@ -143,10 +143,10 @@ for db in \$databases; do
 done
 
 EOL
-chmod +x /var/lib/marzban/mysql/ac-backup.sh
+chmod +x /var/lib/marzban/mysql/backup-succeed.sh
 
 ZIP=$(cat <<EOF
-docker exec marzban-mysql-1 bash -c "/var/lib/mysql/ac-backup.sh"
+docker exec marzban-mysql-1 bash -c "/var/lib/mysql/backup-succeed.sh"
 zip -r /root/backup-succeed.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
 zip -r /root/backup-succeed.zip /var/lib/marzban/mysql/db-backup/*
 rm -rf /var/lib/marzban/mysql/db-backup/*
@@ -230,19 +230,19 @@ comment=$(trim "$comment")
 sudo apt install zip -y
 
 # send backup to telegram
-cat > "/root/ac-backup-${xmh}.sh" <<EOL
-rm -rf /root/ac-backup-${xmh}.zip
+cat > "/root/backup-succeed-${xmh}.sh" <<EOL
+rm -rf /root/backup-succeed-${xmh}.zip
 $ZIP
-echo -e "$comment" | zip -z /root/ac-backup-${xmh}.zip
-curl -F chat_id="${chatid}" -F caption=\$'${caption}' -F parse_mode="HTML" -F document=@"/root/ac-backup-${xmh}.zip" https://api.telegram.org/bot${tk}/sendDocument
+echo -e "$comment" | zip -z /root/backup-succeed-${xmh}.zip
+curl -F chat_id="${chatid}" -F caption=\$'${caption}' -F parse_mode="HTML" -F document=@"/root/backup-succeed-${xmh}.zip" https://api.telegram.org/bot${tk}/sendDocument
 EOL
 
 
 # Add cronjob
-{ crontab -l -u root; echo "${cron_time} /bin/bash /root/ac-backup-${xmh}.sh >/dev/null 2>&1"; } | crontab -u root -
+{ crontab -l -u root; echo "${cron_time} /bin/bash /root/backup-succeed-${xmh}.sh >/dev/null 2>&1"; } | crontab -u root -
 
 # run the script
-bash "/root/ac-backup-${xmh}.sh"
+bash "/root/backup-succeed-${xmh}.sh"
 
 # Done
     echo -e ""
