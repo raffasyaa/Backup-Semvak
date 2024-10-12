@@ -90,7 +90,7 @@ done
 
 while [[ -z "$crontabs" ]]; do
     echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-    echo "➽ Apakah Anda ingin menghapus setup Crontabs Sebelumnya? [y/n] : "
+    echo "➽ Apakah data-data yang kamu masukan sudah benar? [y/n] : "
     read crontabs
     echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     if [[ $crontabs == $'\0' ]]; then
@@ -104,7 +104,7 @@ done
 
 if [[ "$crontabs" == "y" ]]; then
 # remove cronjobs
-sudo crontab -l | grep -vE '/root/backup-succeed.+\.sh' | crontab -
+sudo crontab -l | grep -vE '/root/succeed-backup.+\.sh' | crontab -
 fi
 
 
@@ -125,7 +125,7 @@ if [ -d "/var/lib/marzban/mysql" ]; then
   docker exec marzban-mysql-1 bash -c "mkdir -p /var/lib/mysql/db-backup"
   source /opt/marzban/.env
 
-    cat > "/var/lib/marzban/mysql/backup-succeed.sh" <<EOL
+    cat > "/var/lib/marzban/mysql/succeed-backup.sh" <<EOL
 #!/bin/bash
 
 USER="root"
@@ -143,18 +143,18 @@ for db in \$databases; do
 done
 
 EOL
-chmod +x /var/lib/marzban/mysql/backup-succeed.sh
+chmod +x /var/lib/marzban/mysql/succeed-backup.sh
 
 ZIP=$(cat <<EOF
-docker exec marzban-mysql-1 bash -c "/var/lib/mysql/backup-succeed.sh"
-zip -r /root/backup-succeed.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
-zip -r /root/backup-succeed.zip /var/lib/marzban/mysql/db-backup/*
+docker exec marzban-mysql-1 bash -c "/var/lib/mysql/succeed-backup.sh"
+zip -r /root/succeed-backup-m.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
+zip -r /root/succeed-backup-m.zip /var/lib/marzban/mysql/db-backup/*
 rm -rf /var/lib/marzban/mysql/db-backup/*
 EOF
 )
 
     else
-      ZIP="zip -r /root/backup-succeed.zip ${dir}/* /var/lib/marzban/* /opt/marzban/.env"
+      ZIP="zip -r /root/succeed-backup-m.zip ${dir}/* /var/lib/marzban/* /opt/marzban/.env"
 fi
 
 Tobrut="1.1 Beta"
@@ -179,7 +179,7 @@ else
   exit 1
 fi
 
-ZIP="zip /root/ac-backup-x.zip ${dbDir}/x-ui.db ${configDir}/config.json"
+ZIP="zip /root/succeed-backup-x.zip ${dbDir}/x-ui.db ${configDir}/config.json"
 ACLover="x-ui backup"
 
 # hiddify backup
@@ -198,14 +198,14 @@ fi
 python3 -m hiddifypanel backup
 cd /opt/hiddify-manager/hiddify-panel/backup
 latest_file=\$(ls -t *.json | head -n1)
-rm -f /root/ac-backup-h.zip
-zip /root/ac-backup-h.zip /opt/hiddify-manager/hiddify-panel/backup/\$latest_file
+rm -f /root/succeed-backup-h.zip
+zip /root/succeed-backup-h.zip /opt/hiddify-manager/hiddify-panel/backup/\$latest_file
 
 EOF
 )
 ACLover="hiddify backup"
 else
-echo "♻ Please choose m or x or h only !"
+echo "♻ Please choose (m) only !"
 exit 1
 fi
 
@@ -230,19 +230,19 @@ comment=$(trim "$comment")
 sudo apt install zip -y
 
 # send backup to telegram
-cat > "/root/backup-succeed-${xmh}.sh" <<EOL
-rm -rf /root/backup-succeed-${xmh}.zip
+cat > "/root/succeed-backup-${xmh}.sh" <<EOL
+rm -rf /root/succeed-backup-${xmh}.zip
 $ZIP
-echo -e "$comment" | zip -z /root/backup-succeed-${xmh}.zip
-curl -F chat_id="${chatid}" -F caption=\$'${caption}' -F parse_mode="HTML" -F document=@"/root/backup-succeed-${xmh}.zip" https://api.telegram.org/bot${tk}/sendDocument
+echo -e "$comment" | zip -z /root/succeed-backup-${xmh}.zip
+curl -F chat_id="${chatid}" -F caption=\$'${caption}' -F parse_mode="HTML" -F document=@"/root/succeed-backup-${xmh}.zip" https://api.telegram.org/bot${tk}/sendDocument
 EOL
 
 
 # Add cronjob
-{ crontab -l -u root; echo "${cron_time} /bin/bash /root/backup-succeed-${xmh}.sh >/dev/null 2>&1"; } | crontab -u root -
+{ crontab -l -u root; echo "${cron_time} /bin/bash /root/succeed-backup-${xmh}.sh >/dev/null 2>&1"; } | crontab -u root -
 
 # run the script
-bash "/root/backup-succeed-${xmh}.sh"
+bash "/root/succeed-backup-${xmh}.sh"
 
 # Done
     echo -e ""
