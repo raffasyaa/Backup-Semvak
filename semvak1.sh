@@ -43,7 +43,7 @@ read caption
 # Setup Cronjob
 while true; do
     echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-    echo "Setup Cronjob (minutes spasi hours) (e.g : 30 1) : "
+    echo "➽ Setup Cronjob (minutes spasi hours) (e.g : 30 1) : "
     read minute hour
     if [[ $minute == 0 ]] && [[ $hour == 0 ]]; then
         cron_time="* * * * *"
@@ -65,8 +65,9 @@ done
 
 # x-ui or marzban or hiddify
 while [[ -z "$xmh" ]]; do
-    echo "x-ui or marzban or hiddify? [x/m/h] : "
-    read -r xmh
+    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo "➽ Untuk melanjutkan instalasi kettik (m) : "
+    read xmh
     if [[ $xmh == $'\0' ]]; then
         echo "Invalid input. Please choose x, m or h."
         unset xmh
@@ -77,13 +78,14 @@ while [[ -z "$xmh" ]]; do
 done
 
 while [[ -z "$crontabs" ]]; do
-    echo "Apakah Anda ingin Setup crontab sebelumnya dihapus? [y/n] : "
-    read -r crontabs
+    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo "➽ Apakah Anda ingin menghapus setup Crontabs Sebelumnya? [y/n] : "
+    read crontabs
     if [[ $crontabs == $'\0' ]]; then
-        echo "Invalid input. Please choose y or n."
+        echo "⛔ Invalid input. Please choose y or n."
         unset crontabs
     elif [[ ! $crontabs =~ ^[yn]$ ]]; then
-        echo "${crontabs} is not a valid option. Please choose y or n."
+        echo "${crontabs} ⛔ is not a valid option. Please choose y or n."
         unset crontabs
     fi
 done
@@ -100,7 +102,7 @@ if [[ "$xmh" == "m" ]]; then
 if dir=$(find /opt /root -type d -iname "marzban" -print -quit); then
   echo "The folder exists at $dir"
 else
-  echo "The folder does not exist."
+  echo "⛔ The folder does not exist."
   exit 1
 fi
 
@@ -191,7 +193,7 @@ EOF
 )
 ACLover="hiddify backup"
 else
-echo "Please choose m or x or h only !"
+echo "♻ Please choose m or x or h only !"
 exit 1
 fi
 
@@ -231,6 +233,8 @@ EOL
 bash "/root/ac-backup-${xmh}.sh"
 
 # Done
+    echo -e ""
+    echo -e ""
     echo -e "${YELLOW}########################################\033[0m${NC}"
     echo -e "${YELLOW}#####${NC}${CYAN} Modder SaputraTech CrazyPler ${NC}${YELLOW}#####\033[0m${NC}"
     echo -e "${YELLOW}########################################\033[0m${NC}"
