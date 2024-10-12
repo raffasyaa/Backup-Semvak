@@ -214,7 +214,7 @@ trim() {
 
 IP=$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
 # Deskripsi File
-caption="\n\n\n◈ Client    : ${caption}\n◈ IP Vps    :<code>${IP}</code>\n◈ Version   : ${Tobrut}\n◈ Built By  : @SaputraTech"
+caption="\n\n\n◈ Client    : ${caption}\n◈ IP Vps    : <code>${IP}</code>\n◈ Version   : ${Tobrut}\n◈ Built By  : @SaputraTech"
 comment=$(echo -e "$caption" | sed 's/<code>//g;s/<\/code>//g')
 comment=$(trim "$comment")
 
