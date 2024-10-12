@@ -102,22 +102,23 @@ if [ -d "/var/lib/marzban/mysql" ]; then
   docker exec marzban-mysql-1 bash -c "mkdir -p /var/lib/mysql/db-backup"
   source /opt/marzban/.env
 
-    cat > "/var/lib/marzban/mysql/.sh" <<EOL
+    cat > "/var/lib/marzban/mysql/skt-backup.sh" <<EOL
 #!/bin/bash
 
 USER="root"
 PASSWORD="$MYSQL_ROOT_PASSWORD"
 
 
-databases=\$(mysql --user=\$USER --password=\$PASSWORD -e "SHOW DATABASES;" | tr -d "| " | grep -v Database)
+databases=\$(mysql -h 127.0.0.1 --user=\$USER --password=\$PASSWORD -e "SHOW DATABASES;" | tr -d "| " | grep -v Database)
 
 for db in \$databases; do
     if [[ "\$db" != "information_schema" ]] && [[ "\$db" != "mysql" ]] && [[ "\$db" != "performance_schema" ]] && [[ "\$db" != "sys" ]] ; then
         echo "Dumping database: \$db"
-		mysqldump --force --opt --user=\$USER --password=\$PASSWORD --databases \$db > /var/lib/mysql/db-backup/\$db.sql
+		mysqldump -h 127.0.0.1 --force --opt --user=\$USER --password=\$PASSWORD --databases \$db > /var/lib/mysql/db-backup/\$db.sql
 
     fi
 done
+
 
 EOL
 chmod +x /var/lib/marzban/mysql/skt-backup.sh
