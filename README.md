@@ -1,5 +1,3 @@
-###
-
 <h1 align="left">Info Semvak</h1>
 
 ###
@@ -61,22 +59,6 @@ bash <(curl -Ls https://github.com/rafaasyaa/Backup-Semvak/raw/main/semvak1.sh)
 ###
 
 <p align="left">Kemudian ia akan menanyakan apakah Anda ingin menghapus tugas cron yang telah ditentukan sebelumnya atau tidak?<br>Masukkan (y) jika Anda ingin menghapusnya, jika tidak masukkan (n)</p>
-
-###
-
-<h1 align="left">Possible problems</h1>
-
-###
-
-<p align="left">If you have entered everything correctly, the backup file should be sent to you once, otherwise there is a problem in this process and you can raise your problem from the issues</p>
-
-###
-
-<h1 align="left">Help us</h1>
-
-###
-
-<p align="left">I used the translator and if I have gramme problem please help me to improve it<br>Also, I have tested this script only on Ubuntu and developers can help us to develop this script for other operating systems.</p>
 
 ###
 
