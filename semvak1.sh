@@ -10,6 +10,7 @@ export CYAN='\033[0;36m';
 export LIGHT='\033[0;37m';
 export NC='\033[0m';
 
+clear
     echo -e ""
     echo -e "${YELLOW}############################################\033[0m${NC}"
     echo -e "${YELLOW}#######${NC}${CYAN}  BOT Backuper For Marzban  ${NC}${YELLOW}#########\033[0m${NC}"
@@ -243,7 +244,7 @@ EOL
 
 # run the script
 bash "/root/succeed-backup-${xmh}.sh"
-
+clear
 # Done
     echo -e ""
     echo -e "${CYAN}
