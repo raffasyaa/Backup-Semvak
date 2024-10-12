@@ -1,7 +1,3 @@
-<br clear="both">
-
-<p align="left">‏<br>‏</p>
-
 ###
 
 <h1 align="left">Info Semvak</h1>
