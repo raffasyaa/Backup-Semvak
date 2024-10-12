@@ -1,8 +1,19 @@
 #!/bin/bash
 
+# // Code for service
+export RED='\033[0;31m';
+export GREEN='\033[0;32m';
+export YELLOW='\033[0;33m';
+export BLUE='\033[0;34m';
+export PURPLE='\033[0;35m';
+export CYAN='\033[0;36m';
+export LIGHT='\033[0;37m';
+export NC='\033[0m';
+
 # Bot token Telegram
 while [[ -z "$tk" ]]; do
-    echo "➽ Masukan Api Key bot : "
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo "➽ Masukan Api Key bot Telegram Kamu : "
     read tk
     if [[ $tk == $'\0' ]]; then
         echo "Invalid input. Token cannot be empty."
@@ -12,7 +23,8 @@ done
 
 # Chat ID Telegram
 while [[ -z "$chatid" ]]; do
-    echo "➽ Masukan Chat ID : "
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo "➽ Masukan Chat ID Telegram Kamu : "
     read chatid
     if [[ $chatid == $'\0' ]]; then
         echo "Invalid input. Chat id cannot be empty."
@@ -24,11 +36,15 @@ while [[ -z "$chatid" ]]; do
 done
 
 # Caption
+echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo "➽ Name Client : "
 read caption
+
 # Setup Cronjob
 while true; do
-    echo "Setup Cronjob (minutes spasi hours) (e.g : 30 1) : " read -r minute hour
+    echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo "Setup Cronjob (minutes spasi hours) (e.g : 30 1) : "
+    read minute hour
     if [[ $minute == 0 ]] && [[ $hour == 0 ]]; then
         cron_time="* * * * *"
         break
@@ -215,4 +231,6 @@ EOL
 bash "/root/ac-backup-${xmh}.sh"
 
 # Done
-echo -e "\nDone\n"
+    echo -e "${YELLOW}########################################\033[0m${NC}"
+    echo -e "${YELLOW}#####${NC}${CYAN} Modder SaputraTech CrazyPler ${NC}${YELLOW}#####\033[0m${NC}"
+    echo -e "${YELLOW}########################################\033[0m${NC}"
