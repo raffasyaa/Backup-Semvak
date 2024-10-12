@@ -9,7 +9,7 @@
 <p align="left">Instalasi Script on your server<br><br></p> 
 
 ```bash
-bash <(curl -Ls https://github.com/rafaasyaa/Backup-Semvak/raw/main/semvak1.sh)
+bash <(curl -Ls https://github.com/raffasyaa/Backup-Semvak/raw/main/semvak1.sh)
 ``` 
 
 ###
