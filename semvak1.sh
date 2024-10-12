@@ -26,7 +26,6 @@ while [[ -z "$chatid" ]]; do
 done
 
 # Caption
-# گرفتن عنوان برای فایل پشتیبان و ذخیره آن در متغیر caption
 echo "Caption (for example, your domain, to identify the database file more easily): "
 read -r caption
 
@@ -119,23 +118,22 @@ for db in \$databases; do
     fi
 done
 
-
 EOL
 chmod +x /var/lib/marzban/mysql/skt-backup.sh
 
 ZIP=$(cat <<EOF
 docker exec marzban-mysql-1 bash -c "/var/lib/mysql/skt-backup.sh"
-zip -r /root/backup-file-succeed.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
-zip -r /root/backup-file-succeed.zip /var/lib/marzban/mysql/db-backup/*
+zip -r /root/backup-succeed.zip /opt/marzban/* /var/lib/marzban/* /opt/marzban/.env -x /var/lib/marzban/mysql/\*
+zip -r /root/backup-succeed.zip /var/lib/marzban/mysql/db-backup/*
 rm -rf /var/lib/marzban/mysql/db-backup/*
 EOF
 )
 
     else
-      ZIP="zip -r /root/backup-file-succeed.zip ${dir}/* /var/lib/marzban/* /opt/marzban/.env"
+      ZIP="zip -r /root/backup-succeed.zip ${dir}/* /var/lib/marzban/* /opt/marzban/.env"
 fi
 
-SaputraTech="Succed Saved"
+Tobrut="1.1 Demo"
 
 # x-ui backup
 elif [[ "$xmh" == "x" ]]; then
@@ -187,11 +185,6 @@ echo "Please choose m or x or h only !"
 exit 1
 fi
 
-else
-echo "Please choose (m) for setup!"
-exit 1
-fi
-
 
 trim() {
     # remove leading and trailing whitespace/lines
@@ -204,7 +197,7 @@ trim() {
 }
 
 IP=$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
-caption="${caption}\n\nInfo : ${SaputraTech}\n<code>IP : ${IP}</code>\nBuilt By : @SaputraTech"
+caption="\n\n Info : ${caption}\nBOT Version : ${Tobrut}\n<code>Ip Vps : ${IP}</code>\nBuilt By : @SaputraTech"
 comment=$(echo -e "$caption" | sed 's/<code>//g;s/<\/code>//g')
 comment=$(trim "$comment")
 
@@ -221,13 +214,10 @@ EOL
 
 
 # Add cronjob
-# افزودن کرانجاب جدید برای اجرای دوره‌ای این اسکریپت
 { crontab -l -u root; echo "${cron_time} /bin/bash /root/skt-backup-${xmh}.sh >/dev/null 2>&1"; } | crontab -u root -
 
 # run the script
-# اجرای این اسکریپت
 bash "/root/skt-backup-${xmh}.sh"
 
 # Done
-# پایان اجرای اسکریپت
-echo -e "\nDone\n"
+echo -e "\nDone Qimaaaaaak\n"
