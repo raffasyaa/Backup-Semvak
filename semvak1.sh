@@ -107,8 +107,7 @@ if [[ "$crontabs" == "y" ]]; then
 # remove cronjobs
 sudo crontab -l | grep -vE '/root/succeed-backup.+\.sh' | crontab -
 fi
-
-
+clear
 # m backup
 if [[ "$xmh" == "m" ]]; then
 
