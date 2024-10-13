@@ -102,6 +102,7 @@ while [[ -z "$crontabs" ]]; do
         unset crontabs
     fi
 done
+clear
 
 if [[ "$crontabs" == "y" ]]; then
 # remove cronjobs
@@ -237,7 +238,7 @@ echo -e "$comment" | zip -z /root/succeed-backup-${xmh}.zip
 curl -F chat_id="${chatid}" -F caption=\$'${caption}' -F parse_mode="HTML" -F document=@"/root/succeed-backup-${xmh}.zip" https://api.telegram.org/bot${tk}/sendDocument
 EOL
 
-
+clear
 # Add cronjob
 { crontab -l -u root; echo "${cron_time} /bin/bash /root/succeed-backup-${xmh}.sh >/dev/null 2>&1"; } | crontab -u root -
 
