@@ -52,13 +52,6 @@ bash <(curl -Ls https://github.com/raffasyaa/Backup-Semvak/raw/main/semvak1.sh)
 
 <p align="left">Pada pilihan ini anda tinggal ketik saja ( m ) yg berarti marzban lalu enter.</p>
 
-###
-
-<h3 align="left">Step 7 : question of removing previous crown jobs</h3>
-
-###
-
-<p align="left">Kemudian ia akan menanyakan apakah Anda ingin menghapus tugas cron yang telah ditentukan sebelumnya atau tidak?<br>Masukkan (y) jika Anda ingin menghapusnya, jika tidak masukkan (n)</p>
 
 ###
 
