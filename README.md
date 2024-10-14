@@ -26,7 +26,7 @@ bash <(curl -Ls https://github.com/raffasyaa/Backup-Semvak/raw/main/semvak1.sh)
 
 ###
 
-<p align="left">Kemudian nanti akakn dimintai chat id, Anda harus mengambil nya dari bot https://t.me/userinfobot dan memberikan token tersebut</p>
+<p align="left">Kemudian nanti akan dimintai chat id, Anda harus mengambil nya dari bot https://t.me/userinfobot dan memberikan token tersebut</p>
 
 ###
 
